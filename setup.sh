@@ -32,39 +32,30 @@ echo "Installing brew git utilities..."
 brew install git-extras
 brew install legit
 brew install git-flow
+brew install terraform
 
 echo "Installing other brew stuff..."
 brew install tree
 brew install wget
-brew install nvm
-
-
-#@TODO install our custom fonts and stuff
+brew install zsh
 
 echo "Cleaning up brew"
 brew cleanup
-
-echo "Installing homebrew cask"
-brew install caskroom/cask/brew-cask
-
-echo "Copying dotfiles from Github"
-cd ~
-git clone git@github.com:bradp/dotfiles.git .dotfiles
-cd .dotfiles
-sh symdotfiles
-
-echo "Grunting it up"
-npm install -g grunt-cli
 
 #Install Zsh & Oh My Zsh
 echo "Installing Oh My ZSH..."
 curl -L http://install.ohmyz.sh | sh
 
-echo "Setting up Oh My Zsh theme..."
-cd  /Users/bradparbs/.oh-my-zsh/themes
-curl https://gist.githubusercontent.com/bradp/a52fffd9cad1cd51edb7/raw/cb46de8e4c77beb7fad38c81dbddf531d9875c78/brad-muse.zsh-theme > brad-muse.zsh-theme
+# Node version manager
+brew install nvm
+mkdir -p ~/.nvm 
+grep -qxF 'export NVM_DIR=~/.nvm' ~/.zshrc || echo 'export NVM_DIR=~/.nvm' >> ~/.zshrc
+grep -qxF 'source $(brew --prefix nvm)/nvm.sh' ~/.zshrc || echo 'source $(brew --prefix nvm)/nvm.sh' >> ~/.zshrc
+source ~/.zshrc
+nvm install node
 
 echo "Setting up Zsh plugins..."
+sed -i'.bak' -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/g' ~/.zshrc
 cd ~/.oh-my-zsh/custom/plugins
 git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
 
@@ -73,55 +64,26 @@ chsh -s /bin/zsh
 
 # Apps
 apps=(
-# alfred
-# bartender
-# bettertouchtool
-# cleanmymac
-# cloud
-# colloquy
-# cornerstone
-# diffmerge
-# dropbox
-# filezilla
+  caffeine
+  keepassxc
+  telegram-desktop
+  nextcloud
+  owncloud
+  google-drive
+  microsoft-teams
+  signal
   firefox
   google-chrome
-# harvest
-# hipchat
-# licecap
-# mou
-# phpstorm
-# private-internet-access
-# razer-synapse
-# sourcetree
-# steam
-# spotify
-# vagrant
- iterm2
-# sublime-text2
-# textexpander
-# virtualbox
-# mailbox
- vlc
-# skype
-# transmission
-# zoomus
-# onepassword
-# sequel-pro
-# chromecast
-# lmarkdown
-# qlstephen
-# suspicious-package
-visual-studio-code
+  iterm2
+  vlc
+  visual-studio-code
 )
 
 # Install apps to /Applications
 # Default is: /Users/$user/Applications
 echo "installing apps with Cask..."
-brew cask install --appdir="/Applications" ${apps[@]}
+brew install --cask --appdir="/Applications" ${apps[@]}
 
-#brew cask alfred link
-
-brew cask cleanup
 brew cleanup
 
 echo "Setting some Mac settings..."
