@@ -44,7 +44,7 @@ brew cleanup
 
 #Install Zsh & Oh My Zsh
 echo "Installing Oh My ZSH..."
-curl -L http://install.ohmyz.sh | sh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Node version manager
 brew install nvm
