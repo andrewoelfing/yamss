@@ -66,12 +66,12 @@ chsh -s /bin/zsh
 apps=(
   caffeine
   keepassxc
-  telegram-desktop
-  nextcloud
-  owncloud
-  google-drive
+#  telegram-desktop
+#  nextcloud
+#  owncloud
+#  google-drive
   microsoft-teams
-  signal
+#  signal
   firefox
   google-chrome
   iterm2
