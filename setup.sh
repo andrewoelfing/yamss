@@ -8,12 +8,20 @@ read -p "Press [Enter] key after this..."
 echo "Installing xcode-stuff"
 xcode-select --install
 
+# check if M1
+echo "Installing rosetta-stuff"
+sudo softwareupdate --install-rosetta
+
 # Check for Homebrew,
 # Install if we don't have it
 if test ! $(which brew); then
   echo "Installing homebrew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+# ToDo
+# grep -qxF 'export NVM_DIR=~/.nvm' ~/.zshrc || echo 'export NVM_DIR=~/.nvm' >> ~/.zshrc
+# /opt/homebrew/bin
 
 # Update homebrew recipes
 echo "Updating homebrew..."
@@ -32,12 +40,18 @@ echo "Installing brew git utilities..."
 brew install git-extras
 brew install legit
 brew install git-flow
-brew install terraform
 
 echo "Installing other brew stuff..."
 brew install tree
 brew install wget
 brew install zsh
+brew install terraform
+brew install ansible
+brew install openconnect
+brew install docker
+brew install docker-compose
+brew install zoom
+brew install colima
 
 echo "Cleaning up brew"
 brew cleanup
@@ -78,6 +92,8 @@ apps=(
   vlc
   visual-studio-code
   tunnelblick
+  citrix-workspace
+  sequel-pro
 )
 
 # Install apps to /Applications
@@ -222,22 +238,6 @@ defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.Web
 
 #"Adding a context menu item for showing the Web Inspector in web views"
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-
-#"Use `~/Downloads/Incomplete` to store incomplete downloads"
-defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
-defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Downloads/Incomplete"
-
-#"Don't prompt for confirmation before downloading"
-defaults write org.m0k.transmission DownloadAsk -bool false
-
-#"Trash original torrent files"
-#defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
-
-#"Hide the donate message"
-defaults write org.m0k.transmission WarningDonate -bool false
-
-#"Hide the legal disclaimer"
-defaults write org.m0k.transmission WarningLegal -bool false
 
 #"Disable 'natural' (Lion-style) scrolling"
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
