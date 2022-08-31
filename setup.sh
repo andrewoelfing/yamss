@@ -33,7 +33,7 @@ sudo chmod -R 600 ${HOME}/.ssh/*
 
 # check if M1
 echo "Installing rosetta-stuff"
-sudo softwareupdate --install-rosetta
+sudo softwareupdate --install-rosetta --agree-to-license
 
 # Check for Homebrew,
 # Install if we don't have it
@@ -103,12 +103,7 @@ chsh -s /bin/zsh
 apps=(
   caffeine
   keepassxc
-#  telegram-desktop
-#  nextcloud
-#  owncloud
-#  google-drive
   microsoft-teams
-#  signal
   firefox
   google-chrome
   iterm2
