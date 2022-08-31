@@ -5,8 +5,31 @@ echo "Please add this public key to Github \n"
 echo "https://github.com/account/ssh \n"
 read -p "Press [Enter] key after this..."
 
-echo "Installing xcode-stuff"
-xcode-select --install
+##################################
+# Install command line dev tools #
+##################################
+# Note: Commenting this out - since it will take a long time to download and install xcode if this is triggered accidentally more than once
+xcode-select -p > /dev/null 2>&1
+if [ $# != 0 ]; then
+  # Uninstall if already present (or) if an older version is installed
+  sudo rm -rf $(xcode-select -p)
+  xcode-select --install
+  sudo xcodebuild -license accept
+fi
+
+#####################
+# Turn on FileVault #
+#####################
+FILEVAULT_STATUS=$(fdesetup status)
+if [[ ${FILEVAULT_STATUS} != "FileVault is On." ]]; then
+  echo "FileVault is not turned on. Please encrypt your hard disk!"
+fi
+
+#################################
+# Setup ssh scripts/directories #
+#################################
+mkdir -p ${HOME}/.ssh
+sudo chmod -R 600 ${HOME}/.ssh/*
 
 # check if M1
 echo "Installing rosetta-stuff"
