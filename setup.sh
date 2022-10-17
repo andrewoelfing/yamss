@@ -71,7 +71,6 @@ brew install zsh
 brew install terraform
 brew install ansible
 brew install openconnect
-brew install docker
 brew install docker-compose
 brew install zoom
 brew install colima
@@ -112,6 +111,9 @@ apps=(
   tunnelblick
   citrix-workspace
   sequel-pro
+  docker
+  homebrew/cask-drivers/displaylink
+  intellij-idea
 )
 
 # Install apps to /Applications
@@ -203,6 +205,9 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 
 #"Setting email addresses to copy as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app"
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+#"Disable attachement inline view"
+defaults write com.apple.mail DisableInlineAttachmentViewing -bool yes
 
 #"Enabling UTF-8 ONLY in Terminal.app and setting the Pro theme by default"
 defaults write com.apple.terminal StringEncodings -array 4
